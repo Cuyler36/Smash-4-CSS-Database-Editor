@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2C6C2A9-66C6-4084-AC80-F916A11C0C4E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Smash_Character_Database_Editor</RootNamespace>
+    <AssemblyName>Smash Character Database Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Smash_4_CSS_Editor_Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Character.cs" />
+    <Compile Include="Classes\DataManager.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\All Miis.png" />
+    <Resource Include="Icons\Bayonetta.png" />
+    <Resource Include="Icons\Bowser Jr..png" />
+    <Resource Include="Icons\Bowser.png" />
+    <Resource Include="Icons\Captain Falcon.png" />
+    <Resource Include="Icons\Charizard.png" />
+    <Resource Include="Icons\Cloud.png" />
+    <Resource Include="Icons\Corrin.png" />
+    <Resource Include="Icons\Dark Pit.png" />
+    <Resource Include="Icons\Diddy Kong.png" />
+    <Resource Include="Icons\Donkey Kong.png" />
+    <Resource Include="Icons\Dr. Mario.png" />
+    <Resource Include="Icons\Duck Hunt.png" />
+    <Resource Include="Icons\Falco.png" />
+    <Resource Include="Icons\Fox.png" />
+    <Resource Include="Icons\Game &amp; Watch.png" />
+    <Resource Include="Icons\Ganon.png" />
+    <Resource Include="Icons\Greninja.png" />
+    <Resource Include="Icons\Ike.png" />
+    <Resource Include="Icons\Jigglypuff.png" />
+    <Resource Include="Icons\King Dedede.png" />
+    <Resource Include="Icons\Kirby.png" />
+    <Resource Include="Icons\Link.png" />
+    <Resource Include="Icons\Little Mac.png" />
+    <Resource Include="Icons\Lucario.png" />
+    <Resource Include="Icons\Lucas.png" />
+    <Resource Include="Icons\Lucina.png" />
+    <Resource Include="Icons\Luigi.png" />
+    <Resource Include="Icons\Mario.png" />
+    <Resource Include="Icons\Marth.png" />
+    <Resource Include="Icons\Megaman.png" />
+    <Resource Include="Icons\Meta Knight.png" />
+    <Resource Include="Icons\Mewtwo.png" />
+    <Resource Include="Icons\Mii Brawler.png" />
+    <Resource Include="Icons\Mii Gunner.png" />
+    <Resource Include="Icons\Mii Swordsman.png" />
+    <Resource Include="Icons\Ness.png" />
+    <Resource Include="Icons\Olimar.png" />
+    <Resource Include="Icons\Pac-man.png" />
+    <Resource Include="Icons\Palutena.png" />
+    <Resource Include="Icons\Peach.png" />
+    <Resource Include="Icons\Pikachu.png" />
+    <Resource Include="Icons\Pit.png" />
+    <Resource Include="Icons\R.O.B..png" />
+    <Resource Include="Icons\Random.png" />
+    <Resource Include="Icons\Robin.png" />
+    <Resource Include="Icons\Rosalina.png" />
+    <Resource Include="Icons\Roy.png" />
+    <Resource Include="Icons\Ryu.png" />
+    <Resource Include="Icons\Samus.png" />
+    <Resource Include="Icons\Sheik.png" />
+    <Resource Include="Icons\Shulk.png" />
+    <Resource Include="Icons\Sonic.png" />
+    <Resource Include="Icons\Toon Link.png" />
+    <Resource Include="Icons\Villager.png" />
+    <Resource Include="Icons\Wario.png" />
+    <Resource Include="Icons\Wii Fit.png" />
+    <Resource Include="Icons\Yoshi.png" />
+    <Resource Include="Icons\Zelda.png" />
+    <Resource Include="Icons\Zero Suit Samus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Smash_4_CSS_Editor_Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Smash_4_CSS_Editor_Logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>MKDIR "$(TargetDir)Icons"
+XCOPY "$(ProjectDir)Icons" "$(TargetDir)Icons" /S /Y</PostBuildEvent>
+  </PropertyGroup>
+</Project>
