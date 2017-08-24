@@ -165,6 +165,43 @@ namespace Smash_Character_Database_Editor
             {0xE1, "Assist Trophy"},
             {0xE2, "Pokemon"},
         };
+
+        public static Dictionary<uint, string> Series_Names = new Dictionary<uint, string>
+        {
+            {0x00, "Smash"},
+            {0x01, "Donkey Kong"},
+            {0x02, "Starfox"},
+            {0x03, "Kirby"},
+            {0x04, "F-Zero"},
+            {0x05, "Metroid"},
+            {0x06, "Earthbound"},
+            {0x07, "Pokemon"},
+            {0x08, "Legend of Zelda"},
+            {0x09, "Mario"},
+            {0x0A, "Yoshi"},
+            {0x0B, "Fire Emblem"},
+            {0x0C, "Game & Watch"},
+            {0x0D, "Pikmin"},
+            {0x0E, "Wario"},
+            {0x0F, "Kid Icarus"},
+            {0x11, "Gyromite"},
+            {0x12, "Sonic"},
+            {0x15, "Animal Crossing"},
+            {0x16, "Wii Fit"},
+            {0x17, "Xenoblade"},
+            {0x18, "Punch-Out"},
+            {0x19, "Duck Hunt"},
+            {0x1B, "Megaman"},
+            {0x1E, "Pac-Man"},
+            {0x20, "Wrecking Crew"},
+            {0x21, "Wuhu Island"},
+            {0x22, "Miiverse"},
+            {0x23, "Pilotwings"},
+            {0x27, "Street Fighter"},
+            {0x28, "Final Fantasy"},
+            {0x29, "Bayonetta"},
+            {0x63, "Etc"},
+        };
     }
 
     class Character

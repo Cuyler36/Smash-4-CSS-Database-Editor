@@ -68,6 +68,7 @@ namespace Smash_Character_Database_Editor
 
             // Add ItemSource for ComboBoxes
             CosmeticId.ItemsSource = CharacterInfo.Cosmetic_Names.Values;
+            SeriesIcon.ItemsSource = CharacterInfo.Series_Names.Values;
 
             // Generate Character Icon and Name ID Panels
             for (int i = 1; i < 0x11; i++)
@@ -187,8 +188,6 @@ namespace Smash_Character_Database_Editor
             }
 
             DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
-            // Disable Unfinished Combo Boxes
-            SeriesIcon.IsEnabled = false;
         }
 
         private static int CompareCharacters(Character A, Character B)
@@ -241,6 +240,21 @@ namespace Smash_Character_Database_Editor
             if (CharacterInfo.Cosmetic_Names.ContainsKey(Fighter.Cosmetic_ID))
             {
                 CosmeticId.SelectedIndex = Array.IndexOf(CharacterInfo.Cosmetic_Names.Keys.ToArray(), Fighter.Cosmetic_ID);
+            }
+
+            if (CharacterInfo.Series_Names.ContainsKey(Fighter.Series_Icon))
+            {
+                SeriesIcon.SelectedIndex = Array.IndexOf(CharacterInfo.Series_Names.Keys.ToArray(), Fighter.Series_Icon);
+            }
+
+            string Image_Path = Executable_Path + "\\Series Icons\\" + CharacterInfo.Series_Names.Values.ToArray()[SeriesIcon.SelectedIndex] + ".png";
+            if (File.Exists(Image_Path))
+            {
+                SeriesIconImage.Source = new BitmapImage(new Uri(Image_Path));
+            }
+            else
+            {
+                MessageBox.Show(Image_Path);
             }
 
             for (int i = 0; i < 16; i++)
@@ -376,6 +390,26 @@ namespace Smash_Character_Database_Editor
                 if (CosmeticId.SelectedIndex > -1)
                 {
                     Selected_Character.Cosmetic_ID = CharacterInfo.Cosmetic_Names.Keys.ToArray()[CosmeticId.SelectedIndex];
+                }
+            }
+        }
+
+        private void SeriesId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Selected_Character != null && !SwitchingCharacters)
+            {
+                if (SeriesIcon.SelectedIndex > -1)
+                {
+                    Selected_Character.Series_Icon = CharacterInfo.Series_Names.Keys.ToArray()[SeriesIcon.SelectedIndex];
+                    string Image_Path = Executable_Path + "\\Series Icons\\" + CharacterInfo.Series_Names.Values.ToArray()[SeriesIcon.SelectedIndex] + ".png";
+                    if (File.Exists(Image_Path))
+                    {
+                        SeriesIconImage.Source = new BitmapImage(new Uri(Image_Path));
+                    }
+                    else
+                    {
+                        MessageBox.Show(Image_Path);
+                    }
                 }
             }
         }

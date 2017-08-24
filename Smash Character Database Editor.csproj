@@ -169,9 +169,66 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\All.png" />
+    <Resource Include="Series Icons\Amiibo.png" />
+    <Resource Include="Series Icons\Animal Crossing.png" />
+    <Resource Include="Series Icons\CD.png" />
+    <Resource Include="Series Icons\Controller.png" />
+    <Resource Include="Series Icons\Donkey Kong.png" />
+    <Resource Include="Series Icons\DS Logo.png" />
+    <Resource Include="Series Icons\Duck Hunt.png" />
+    <Resource Include="Series Icons\Earthbound.png" />
+    <Resource Include="Series Icons\Equipment.png" />
+    <Resource Include="Series Icons\Etc.png" />
+    <Resource Include="Series Icons\F-Zero.png" />
+    <Resource Include="Series Icons\Fire Emblem.png" />
+    <Resource Include="Series Icons\Game &amp; Watch.png" />
+    <Resource Include="Series Icons\Gyromite.png" />
+    <Resource Include="Series Icons\Item.png" />
+    <Resource Include="Series Icons\Kid Icarus.png" />
+    <Resource Include="Series Icons\Kirby.png" />
+    <Resource Include="Series Icons\Mario.png" />
+    <Resource Include="Series Icons\Masterball.png" />
+    <Resource Include="Series Icons\Megaman.png" />
+    <Resource Include="Series Icons\Metroid.png" />
+    <Resource Include="Series Icons\Mii Costume.png" />
+    <Resource Include="Series Icons\Mii Hats.png" />
+    <Resource Include="Series Icons\Mii Plaza.png" />
+    <Resource Include="Series Icons\Miiverse.png" />
+    <Resource Include="Series Icons\Money.png" />
+    <Resource Include="Series Icons\Nintendogs.png" />
+    <Resource Include="Series Icons\Pac-Man.png" />
+    <Resource Include="Series Icons\Pikmin.png" />
+    <Resource Include="Series Icons\Pilotwings.png" />
+    <Resource Include="Series Icons\Pokemon.png" />
+    <Resource Include="Series Icons\Punch-Out.png" />
+    <Resource Include="Series Icons\S-Ticket.png" />
+    <Resource Include="Series Icons\Smash.png" />
+    <Resource Include="Series Icons\Sonic.png" />
+    <Resource Include="Series Icons\Special.png" />
+    <Resource Include="Series Icons\Stage.png" />
+    <Resource Include="Series Icons\Starfox.png" />
+    <Resource Include="Series Icons\Tomodachi.png" />
+    <Resource Include="Series Icons\Wario.png" />
+    <Resource Include="Series Icons\Wii Fit.png" />
+    <Resource Include="Series Icons\Wrecking Crew.png" />
+    <Resource Include="Series Icons\Wuhu Island.png" />
+    <Resource Include="Series Icons\Xenoblade.png" />
+    <Resource Include="Series Icons\Yoshi.png" />
+    <Resource Include="Series Icons\Legend of Zelda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\Bayonetta.png" />
+    <Resource Include="Series Icons\Final Fantasy.png" />
+    <Resource Include="Series Icons\Street Fighter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>MKDIR "$(TargetDir)Icons"
-XCOPY "$(ProjectDir)Icons" "$(TargetDir)Icons" /S /Y</PostBuildEvent>
+XCOPY "$(ProjectDir)Icons" "$(TargetDir)Icons" /S /Y
+
+MKDIR "$(TargetDir)Series Icons"
+XCOPY "$(ProjectDir)Series Icons" "$(TargetDir)Series Icons" /S /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

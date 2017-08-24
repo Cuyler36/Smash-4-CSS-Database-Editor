@@ -13,8 +13,10 @@
         <Label x:Name="label" Content="Cosmetic ID:" HorizontalAlignment="Left" Margin="213,43,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="CosmeticId" SelectionChanged="CosmeticId_SelectionChanged"  HorizontalAlignment="Left" Margin="294,47,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label_Copy" Content="Series Icon:" HorizontalAlignment="Left" Margin="441,43,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="SeriesIconImage" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="24" Margin="641,45,0,0"/>
-        <ComboBox x:Name="SeriesIcon" HorizontalAlignment="Left" Margin="516,47,0,0" VerticalAlignment="Top" Width="120"/>
+        <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="6,6,6,6" Height="32" Width="32" Margin="649,43,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Gray">
+            <Image x:Name="SeriesIconImage" Source="Series Icons/All.png"/>
+        </Border>
+        <ComboBox x:Name="SeriesIcon" SelectionChanged="SeriesId_SelectionChanged" HorizontalAlignment="Left" Margin="516,47,0,0" VerticalAlignment="Top" Width="120"/>
         <Image x:Name="SelectedFighterImage" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="24" Margin="223,12,0,0"/>
         <Label x:Name="SelectedFighterLabel" Content="Mario [Entry 3]" HorizontalAlignment="Left" Margin="252,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy1" Content="Character Slots:" HorizontalAlignment="Left" Margin="213,84,0,0" VerticalAlignment="Top"/>
