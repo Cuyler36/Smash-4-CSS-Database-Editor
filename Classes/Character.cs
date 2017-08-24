@@ -79,6 +79,92 @@ namespace Smash_Character_Database_Editor
             "Mii Enemy (Swordsman)",
             "Mii Enemy (Gunner)"
         };
+
+        public static Dictionary<uint, string> Cosmetic_Names = new Dictionary<uint, string>
+        {
+            {0x01, "Mii Brawler"},
+            {0x02, "Mii Swordsman"},
+            {0x03, "Mii Gunner"},
+            {0x04, "Mario"},
+            {0x05, "Donkey Kong"},
+            {0x06, "Link"},
+            {0x07, "Samus"},
+            {0x08, "Yoshi"},
+            {0x09, "Kirby"},
+            {0x0A, "Fox"},
+            {0x0B, "Pikachu"},
+            {0x0C, "Luigi"},
+            {0x0D, "Falcon"},
+            {0x0E, "Ness"},
+            {0x0F, "Peach"},
+            {0x10, "Bowser"},
+            {0x11, "Zelda"},
+            {0x12, "Sheik"},
+            {0x13, "Marth"},
+            {0x14, "Game & Watch"},
+            {0x15, "Ganon"},
+            {0x16, "Falco"},
+            {0x17, "Wario"},
+            {0x18, "Meta Knight"},
+            {0x19, "Pit"},
+            {0x1A, "Zero Suit Samus"},
+            {0x1B, "Olimar/Alph"},
+            {0x1C, "Diddy Kong"},
+            {0x1D, "King Dedede"},
+            {0x1E, "Ike"},
+            {0x1F, "Lucario"},
+            {0x20, "R.O.B."},
+            {0x21, "Toon Link"},
+            {0x22, "Charizard"},
+            {0x23, "Sonic"},
+            {0x24, "Dr. Mario"},
+            {0x25, "Rosalina"},
+            {0x26, "Wii Fit"},
+            {0x27, "Little Mac"},
+            {0x28, "Villager"},
+            {0x29, "Palutena"},
+            {0x2A, "Robin"},
+            {0x2B, "Duck Hunt"},
+            {0x2C, "Bowser Jr."},
+            {0x2D, "Shulk"},
+            {0x2E, "Jigglypuff"},
+            {0x2F, "Lucina"},
+            {0x30, "Dark Pit"},
+            {0x31, "Greninja"},
+            {0x32, "Pac-Man"},
+            {0x33, "Megaman"},
+            {0x34, "Mewtwo"},
+            {0x35, "Ryu"},
+            {0x36, "Lucas"},
+            {0x37, "Roy"},
+            {0x38, "Cloud"},
+            {0x39, "Bayonetta"},
+            {0x3A, "Corrin"},
+            {0x3B, "Giga Bowser"},
+            {0x3C, "Wario Man"},
+            {0x3D, "Giga Mac"},
+            {0x3E, "Mega Lucario"},
+            {0x48, "Char_71"},
+            {0x4D, "Char_76"},
+            {0x4E, "Char_77"},
+            {0xCB, "Question"},
+            {0xD2, "Master Hand"},
+            {0xD3, "Master Core"},
+            {0xD5, "Crazy Hand"},
+            {0xD6, "Bomb"},
+            {0xD7, "Sandbag"},
+            {0xD8, "Ridley"},
+            {0xD9, "Metal Face"},
+            {0xDA, "Yellow Devil"},
+            {0xDB, "Mii Enemy (Brawler)"},
+            {0xDC, "Mii Enemy (Swordsman)"},
+            {0xDD, "Mii Enemy (Gunner)"},
+            {0xDE, "Mii Enemy (All)"},
+            {0xDF, "Virus"},
+            {0xE0, "Narration"},
+            {0xE1, "Assist Trophy"},
+            {0xE2, "Pokemon"},
+        };
     }
 
     class Character
@@ -108,9 +194,6 @@ namespace Smash_Character_Database_Editor
             for (int i = 0; i < 0x10; i++)
             {
                 Slot_Icon_IDs[i] = DataManager.Read(Data, 0x3F + i * 2);
-            }
-            for (int i = 0; i < 0x10; i++)
-            {
                 Slot_Name_IDs[i] = DataManager.Read(Data, 0x5F + i * 2);
             }
 
@@ -135,6 +218,11 @@ namespace Smash_Character_Database_Editor
             DataManager.Write(ref Buffer, Offset + 0x24, Show_on_CSS ? (byte)0 : (byte)1);
             DataManager.Write(ref Buffer, Offset + 0x26, Is_DLC ? (byte)1 : (byte)0);
             DataManager.Write(ref Buffer, Offset + 0x2C, CSS_Position);
+            for (int i = 0; i < 0x10; i++)
+            {
+                DataManager.Write(ref Buffer, Offset + 0x3F + i * 2, Slot_Icon_IDs[i]);
+                DataManager.Write(ref Buffer, Offset + 0x5F + i * 2, Slot_Name_IDs[i]);
+            }
         }
     }
 }

@@ -30,6 +30,9 @@ namespace Smash_Character_Database_Editor
         private static Character[] Characters;
         private static Character Selected_Character;
         private static StackPanel Selected_Character_Panel;
+        private static TextBox[] Icon_Boxes = new TextBox[16];
+        private static TextBox[] Name_Boxes = new TextBox[16];
+        private static bool SwitchingCharacters = false;
 
         public MainWindow()
         {
@@ -60,7 +63,89 @@ namespace Smash_Character_Database_Editor
                 MessageBox.Show("Unable to find file ui_character_db.bin! Make sure it is in the same directory as the program.", "Error");
                 throw new Exception("Unable to find file ui_character_db.bin! Make sure it is in the same directory as the program.");
             }
+            
             InitializeComponent();
+
+            // Add ItemSource for ComboBoxes
+            CosmeticId.ItemsSource = CharacterInfo.Cosmetic_Names.Values;
+
+            // Generate Character Icon and Name ID Panels
+            for (int i = 1; i < 0x11; i++)
+            {
+                // Icon Portion
+                StackPanel Icon_Panel = new StackPanel
+                {
+                    Height = 24,
+                    Width = 150,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    Orientation = Orientation.Horizontal
+                };
+                Label Icon_Index = new Label
+                {
+                    Height = 24,
+                    Width = 30,
+                    Content = i.ToString(),
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+                TextBox Icon_Value = new TextBox
+                {
+                    Height = 24,
+                    Width = 30,
+                    Text = "0",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    Tag = i - 1
+                };
+
+                Icon_Value.PreviewTextInput += HandlePreviewTextInput;
+                Icon_Value.TextChanged += new TextChangedEventHandler((object sender, TextChangedEventArgs e) => IconValue_TextChanged(sender as TextBox, (int)Icon_Value.Tag));
+
+                Icon_Boxes[i - 1] = Icon_Value;
+                Icon_Panel.Children.Add(Icon_Index);
+                Icon_Panel.Children.Add(Icon_Value);
+                Icon_Panel.UpdateLayout();
+                IconIDPanel.Children.Add(Icon_Panel);
+
+                // Name Portion
+                StackPanel Name_Panel = new StackPanel
+                {
+                    Height = 24,
+                    Width = 150,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    Orientation = Orientation.Horizontal
+                };
+                Label Name_Index = new Label
+                {
+                    Height = 24,
+                    Width = 30,
+                    Content = i.ToString(),
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+                TextBox Name_Value = new TextBox
+                {
+                    Height = 24,
+                    Width = 30,
+                    Text = "0",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    Tag = i - 1
+                };
+
+                Name_Value.PreviewTextInput += HandlePreviewTextInput;
+                Name_Value.TextChanged += new TextChangedEventHandler((object sender, TextChangedEventArgs e) => NameValue_TextChanged(sender as TextBox, (int)Name_Value.Tag));
+
+                Name_Boxes[i - 1] = Name_Value;
+                Name_Panel.Children.Add(Name_Index);
+                Name_Panel.Children.Add(Name_Value);
+                Name_Panel.UpdateLayout();
+                NameIDPanel.Children.Add(Name_Panel);
+            }
+
+            // Generate Fighter Selection Panels
             for (int i = 3; i < Characters.Length; i++)
             {
                 if (Characters[i].ID != 0xFFFFFFFF)
@@ -99,11 +184,11 @@ namespace Smash_Character_Database_Editor
                     Character_Panel.PreviewMouseLeftButtonUp += new MouseButtonEventHandler((object sender, MouseButtonEventArgs e) => SetSelectedFighter(Current_Character, Character_Panel));
                     CharacterStackPanel.Children.Add(Character_Panel);
                 }
-                DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
-                // Disable Unfinished Combo Boxes
-                CosmeticId.IsEnabled = false;
-                SeriesIcon.IsEnabled = false;
             }
+
+            DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
+            // Disable Unfinished Combo Boxes
+            SeriesIcon.IsEnabled = false;
         }
 
         private static int CompareCharacters(Character A, Character B)
@@ -134,6 +219,7 @@ namespace Smash_Character_Database_Editor
 
         private void SetSelectedFighter(Character Fighter, StackPanel Character_Panel = null)
         {
+            SwitchingCharacters = true;
             if (Selected_Character_Panel != null)
             {
                 Selected_Character_Panel.Background = Brushes.Transparent;
@@ -151,12 +237,30 @@ namespace Smash_Character_Database_Editor
             ShowOnCSSCheckBox.IsChecked = Fighter.Show_on_CSS;
             IsDLCCheckBox.IsChecked = Fighter.Is_DLC;
             CSSPositionTextBox.Text = Fighter.CSS_Position.ToString();
+
+            if (CharacterInfo.Cosmetic_Names.ContainsKey(Fighter.Cosmetic_ID))
+            {
+                CosmeticId.SelectedIndex = Array.IndexOf(CharacterInfo.Cosmetic_Names.Keys.ToArray(), Fighter.Cosmetic_ID);
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                try
+                {
+                    Icon_Boxes[i].Text = Fighter.Slot_Icon_IDs[i].ToString();
+                    Name_Boxes[i].Text = Fighter.Slot_Name_IDs[i].ToString();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.StackTrace + " | " + e.Message);
+                }
+            }
+            SwitchingCharacters = false;
         }
 
         private static bool IsTextAllowed(string text)
         {
-            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
-            return !regex.IsMatch(text);
+            return !new Regex("[^0-9.-]+").IsMatch(text);
         }
 
         private void HandlePreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -246,6 +350,33 @@ namespace Smash_Character_Database_Editor
             else
             {
                 Selected_Character.Is_DLC = false;
+            }
+        }
+
+        private void IconValue_TextChanged(TextBox sender, int Index)
+        {
+            if (Selected_Character != null && byte.TryParse(sender.Text, out byte ID))
+            {
+                Selected_Character.Slot_Icon_IDs[Index] = ID;
+            }
+        }
+
+        private void NameValue_TextChanged(TextBox sender, int Index)
+        {
+            if (Selected_Character != null && byte.TryParse(sender.Text, out byte ID))
+            {
+                Selected_Character.Slot_Name_IDs[Index] = ID;
+            }
+        }
+
+        private void CosmeticId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Selected_Character != null && !SwitchingCharacters)
+            {
+                if (CosmeticId.SelectedIndex > -1)
+                {
+                    Selected_Character.Cosmetic_ID = CharacterInfo.Cosmetic_Names.Keys.ToArray()[CosmeticId.SelectedIndex];
+                }
             }
         }
 

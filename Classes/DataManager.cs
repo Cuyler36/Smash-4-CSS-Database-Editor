@@ -14,7 +14,7 @@ namespace Smash_Character_Database_Editor
             {
                 case 0x1:
                 case 0x2:
-                    return Buffer[Offset + 1];
+                    return Buffer[Offset + 1]; // 0x2 is actually sbyte
                 case 0x3:
                     return BitConverter.ToUInt16(Buffer.Skip(Offset + 1).Take(2).Reverse().ToArray(), 0);
                 case 0x4:

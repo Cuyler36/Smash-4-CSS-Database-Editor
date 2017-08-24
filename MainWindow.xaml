@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Smash_Character_Database_Editor"
         mc:Ignorable="d"
-        Title="Smash 4 CSS Database Editor" Height="500" Width="750" ResizeMode="CanMinimize">
+        Title="Smash 4 CSS Database Editor" Height="534.301" Width="750" ResizeMode="CanMinimize">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0">
             <StackPanel x:Name="CharacterStackPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
         </ScrollViewer>
         <Label x:Name="label" Content="Cosmetic ID:" HorizontalAlignment="Left" Margin="213,43,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CosmeticId" HorizontalAlignment="Left" Margin="294,47,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="CosmeticId" SelectionChanged="CosmeticId_SelectionChanged"  HorizontalAlignment="Left" Margin="294,47,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label_Copy" Content="Series Icon:" HorizontalAlignment="Left" Margin="441,43,0,0" VerticalAlignment="Top"/>
         <Image x:Name="SeriesIconImage" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="24" Margin="641,45,0,0"/>
         <ComboBox x:Name="SeriesIcon" HorizontalAlignment="Left" Margin="516,47,0,0" VerticalAlignment="Top" Width="120"/>
@@ -19,10 +19,22 @@
         <Label x:Name="SelectedFighterLabel" Content="Mario [Entry 3]" HorizontalAlignment="Left" Margin="252,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy1" Content="Character Slots:" HorizontalAlignment="Left" Margin="213,84,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="CharacterSlotsTextBox" PreviewTextInput="HandlePreviewTextInput" TextChanged="CharacterSlots_TextChanged" MaxLength="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="30" Margin="310,87,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <CheckBox x:Name="ShowOnCSSCheckBox" Checked="ShowOnCSS_Checked" Unchecked="ShowOnCSS_Unchecked" Content="Show on CSS" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="223,129,0,0"/>
-        <CheckBox x:Name="IsDLCCheckBox" Checked="IsDLC_Checked" Unchecked="IsDLC_Unchecked" Content="DLC Character" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="223,167,0,0"/>
-        <Label x:Name="label_Copy2" Content="CSS Position:" HorizontalAlignment="Left" Margin="368,84,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CSSPositionTextBox" TextChanged="CSSPosition_TextChanged" PreviewTextInput="HandlePreviewTextInput" MaxLength="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="30" Margin="451,87,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="button" Click="SaveButton_Click" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="649,431,0,0"/>
+        <CheckBox x:Name="ShowOnCSSCheckBox" Checked="ShowOnCSS_Checked" Unchecked="ShowOnCSS_Unchecked" Content="Show on CSS" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="483,90,0,0"/>
+        <CheckBox x:Name="IsDLCCheckBox" Checked="IsDLC_Checked" Unchecked="IsDLC_Unchecked" Content="DLC Character" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="594,90,0,0"/>
+        <Label x:Name="label_Copy2" Content="CSS Position:" HorizontalAlignment="Left" Margin="352,84,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CSSPositionTextBox" TextChanged="CSSPosition_TextChanged" PreviewTextInput="HandlePreviewTextInput" MaxLength="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="30" Margin="435,87,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="button" Click="SaveButton_Click" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="649,465,0,0"/>
+        <Border BorderBrush="Gray" BorderThickness="1" Height="320" Width="80" Margin="223,165,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ScrollViewer>
+                <StackPanel x:Name="IconIDPanel" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </ScrollViewer>
+        </Border>
+        <Border BorderBrush="Gray" BorderThickness="1" Height="320" Width="80" Margin="340,165,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ScrollViewer>
+                <StackPanel x:Name="NameIDPanel" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </ScrollViewer>
+        </Border>
+        <Label x:Name="label1" Content="Costume Icon ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,134,0,0"/>
+        <Label x:Name="label1_Copy" Content="Character Name ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,134,0,0"/>
     </Grid>
 </Window>
