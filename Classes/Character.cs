@@ -11,7 +11,7 @@ namespace Smash_Character_Database_Editor
 {
     public static class CharacterInfo
     {
-        public static string[] Character_Names = new string[65]
+        public static string[] Character_Names = new string[67]
         {
             "Mii Brawler",
             "Mii Swordsman",
@@ -71,13 +71,15 @@ namespace Smash_Character_Database_Editor
             "Cloud",
             "Bayonetta",
             "Corrin",
+            "All Miis",
             "Giga Bowser",
             "Wario Man",
             "Giga Mac",
             "Mega Lucario",
             "Mii Enemy (Brawler)",
             "Mii Enemy (Swordsman)",
-            "Mii Enemy (Gunner)"
+            "Mii Enemy (Gunner)",
+            "Random"
         };
 
         public static Dictionary<uint, string> Cosmetic_Names = new Dictionary<uint, string>
@@ -204,7 +206,7 @@ namespace Smash_Character_Database_Editor
         };
     }
 
-    class Character
+    public class Character
     {
         public uint Cosmetic_ID;
         public uint Series_Icon;

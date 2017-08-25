@@ -38,5 +38,6 @@
         </Border>
         <Label x:Name="label1" Content="Costume Icon ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,134,0,0"/>
         <Label x:Name="label1_Copy" Content="Character Name ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,134,0,0"/>
+        <Button x:Name="button1" Click="Preview_Click" Content="Show Preview" HorizontalAlignment="Left" Margin="559,465,0,0" VerticalAlignment="Top" Width="85"/>
     </Grid>
 </Window>

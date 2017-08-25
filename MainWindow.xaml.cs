@@ -49,8 +49,9 @@ namespace Smash_Character_Database_Editor
                         Characters[i] = new Character(Character_DB_Buffer.Skip(0xD + 0x7F * i).Take(0x7F).ToArray());
                         Unsorted_Characters[i] = Characters[i];
                     }
+                    Characters[0].Name = "Random";
                     // Sort Characters by CSS order
-                    Array.Sort(Characters, CompareCharacters);
+                    SortCharacters();
                 }
                 else
                 {
@@ -147,9 +148,19 @@ namespace Smash_Character_Database_Editor
             }
 
             // Generate Fighter Selection Panels
+            GenerateCharacterPanels();
+
+            DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
+
+            //new CSS_Peview_Window(Characters).Show();
+        }
+
+        private void GenerateCharacterPanels()
+        {
+            CharacterStackPanel.Children.Clear();
             for (int i = 3; i < Characters.Length; i++)
             {
-                if (Characters[i].ID != 0xFFFFFFFF)
+                if (Characters[i].ID != 0xFFFFFFFF || Characters[i].Name == "Random") // 0 is random
                 {
                     Character Current_Character = Characters[i];
                     StackPanel Character_Panel = new StackPanel
@@ -175,8 +186,8 @@ namespace Smash_Character_Database_Editor
                         VerticalContentAlignment = VerticalAlignment.Center
                     };
 
-                    // Set Default Selection of Mario
-                    if (i == 3)
+                    // Set Default Selection
+                    if ((Selected_Character != null && Selected_Character.Name.Equals(Characters[i].Name)) || Characters[i].ID == 3)
                         SetSelectedFighter(Current_Character, Character_Panel);
 
                     Character_Panel.Children.Add(Character_Image);
@@ -186,8 +197,22 @@ namespace Smash_Character_Database_Editor
                     CharacterStackPanel.Children.Add(Character_Panel);
                 }
             }
+        }
 
-            DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
+        private void SortCharacters()
+        {
+            Array.Sort(Characters, CompareCharacters);
+            // Put Random at the end (since changing it's CSS Position won't change how smash positions it)
+            Character End_Character = Characters[Characters.Length - 1];
+            for (int i = 0; i < Characters.Length; i++)
+            {
+                if (Characters[i].Name.Equals("Random"))
+                {
+                    Characters[Characters.Length - 1] = Characters[i];
+                    Characters[i] = End_Character;
+                    break;
+                }
+            }
         }
 
         private static int CompareCharacters(Character A, Character B)
@@ -222,15 +247,17 @@ namespace Smash_Character_Database_Editor
             if (Selected_Character_Panel != null)
             {
                 Selected_Character_Panel.Background = Brushes.Transparent;
+                Selected_Character_Panel.UpdateLayout();
             }
             if (Character_Panel != null)
             {
                 Character_Panel.Background = Brushes.LightGray;
+                Character_Panel.UpdateLayout();
             }
             Selected_Character = Fighter;
             Selected_Character_Panel = Character_Panel;
             SelectedFighterImage.Source = Fighter.Character_Image;
-            SelectedFighterLabel.Content = string.Format("{0} [Entry {1}]", Fighter.Name, Fighter.ID);
+            SelectedFighterLabel.Content = string.Format("{0} [ID {1}]", Fighter.Name, Fighter.ID);
             // TODO: Finish Reloading Fighter Data
             CharacterSlotsTextBox.Text = Fighter.Character_Slots.ToString();
             ShowOnCSSCheckBox.IsChecked = Fighter.Show_on_CSS;
@@ -300,8 +327,9 @@ namespace Smash_Character_Database_Editor
 
         private void CSSPosition_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Selected_Character != null && int.TryParse(CSSPositionTextBox.Text, out int Slots))
+            if (!SwitchingCharacters && Selected_Character != null && int.TryParse(CSSPositionTextBox.Text, out int Slots))
             {
+                uint Original_Position = Selected_Character.CSS_Position;
                 if (Slots > 255)
                 {
                     CSSPositionTextBox.Text = "255";
@@ -311,6 +339,23 @@ namespace Smash_Character_Database_Editor
                 {
                     Selected_Character.CSS_Position = (byte)Slots;
                 }
+                // Update other characters CSS Positions
+                foreach (Character Fighter in Characters)
+                {
+                    if ((Fighter != Selected_Character && Fighter.ID != 0xFFFFFFFF) || Fighter.Name.Equals("Random"))
+                    {
+                        if (Selected_Character.CSS_Position < Original_Position && Fighter.CSS_Position >= Selected_Character.CSS_Position && Fighter.CSS_Position < Original_Position)
+                        {
+                            Fighter.CSS_Position += 1;
+                        }
+                        else if (Selected_Character.CSS_Position > Original_Position && Fighter.CSS_Position <= Selected_Character.CSS_Position && Fighter.CSS_Position > Original_Position)
+                        {
+                            Fighter.CSS_Position -= 1;
+                        }
+                    }
+                }
+                SortCharacters();
+                GenerateCharacterPanels();
             }
         }
 
@@ -430,6 +475,12 @@ namespace Smash_Character_Database_Editor
                     }
                 }
             }
+        }
+
+        private void Preview_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            new CSS_Peview_Window(this, Characters).Show();
         }
     }
 }
