@@ -31,7 +31,11 @@ namespace Smash_Character_Database_Editor
 
         private void GenerateCSS_Preview(Character[] Characters)
         {
+<<<<<<< HEAD
             Character[] CSS_Members = Characters.Where(o => (o.ID < 100 && o.Show_on_CSS && o.Playable == 1) || o.Name.Equals("All Miis") || o.Name.Equals("Random")).ToArray();
+=======
+            Character[] CSS_Members = Characters.Where(o => (o.ID < 60 && o.Show_on_CSS) || o.Name.Equals("Random")).ToArray();
+>>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
             int Total_CSS_Members = CSS_Members.Length;
             int Rows = Total_CSS_Members / 14 + 1;
             int i = 0;

@@ -51,8 +51,14 @@
                 <StackPanel x:Name="NameIDPanel" VerticalAlignment="Top" HorizontalAlignment="Left" />
             </ScrollViewer>
         </Border>
+<<<<<<< HEAD
         <Label x:Name="label1" Content="Costume Icon ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,134,0,0" Grid.Column="1"/>
         <Label x:Name="label1_Copy" Content="Character Name ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,134,0,0" Grid.Column="1"/>
         <Button x:Name="PreviewButton" Click="Preview_Click" Content="Show Preview" HorizontalAlignment="Left" Margin="564,470,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+=======
+        <Label x:Name="label1" Content="Costume Icon ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,134,0,0"/>
+        <Label x:Name="label1_Copy" Content="Character Name ID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,134,0,0"/>
+        <Button x:Name="button1" Click="Preview_Click" Content="Show Preview" HorizontalAlignment="Left" Margin="559,465,0,0" VerticalAlignment="Top" Width="85"/>
+>>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
     </Grid>
 </Window>
