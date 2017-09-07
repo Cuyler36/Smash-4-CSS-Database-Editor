@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CSS_Peview_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +73,10 @@
     </Compile>
     <Compile Include="Classes\Character.cs" />
     <Compile Include="Classes\DataManager.cs" />
+    <Compile Include="Classes\Extensions.cs" />
+    <Compile Include="CSS_Peview_Window.xaml.cs">
+      <DependentUpon>CSS_Peview_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -171,12 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Series Icons\All.png" />
-    <Resource Include="Series Icons\Amiibo.png" />
     <Resource Include="Series Icons\Animal Crossing.png" />
     <Resource Include="Series Icons\CD.png" />
     <Resource Include="Series Icons\Controller.png" />
     <Resource Include="Series Icons\Donkey Kong.png" />
-    <Resource Include="Series Icons\DS Logo.png" />
     <Resource Include="Series Icons\Duck Hunt.png" />
     <Resource Include="Series Icons\Earthbound.png" />
     <Resource Include="Series Icons\Equipment.png" />
@@ -222,6 +229,24 @@
     <Resource Include="Series Icons\Bayonetta.png" />
     <Resource Include="Series Icons\Final Fantasy.png" />
     <Resource Include="Series Icons\Street Fighter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\Pictochat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\Figure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\Ballon Fight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Series Icons\Unused.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Wario Man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mega Lucario.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

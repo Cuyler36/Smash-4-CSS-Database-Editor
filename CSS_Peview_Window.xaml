@@ -1,0 +1,16 @@
+﻿<Window x:Class="Smash_Character_Database_Editor.CSS_Peview_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Smash_Character_Database_Editor"
+        mc:Ignorable="d"
+        Title="Preview CSS" Height="224" Width="920" ResizeMode="CanMinimize" Closed="Window_Closed">
+    <Grid x:Name="RootGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Width="900" Margin="0,0,0,0" Height="195">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="CloseButton" Click="CloseButton_Click" Content="Close" Grid.Column="1" Margin="365,155,0,-100" Width="75" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
