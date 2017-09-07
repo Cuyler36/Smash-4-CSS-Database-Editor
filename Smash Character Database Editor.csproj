@@ -73,10 +73,7 @@
     </Compile>
     <Compile Include="Classes\Character.cs" />
     <Compile Include="Classes\DataManager.cs" />
-<<<<<<< HEAD
     <Compile Include="Classes\Extensions.cs" />
-=======
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
     <Compile Include="CSS_Peview_Window.xaml.cs">
       <DependentUpon>CSS_Peview_Window.xaml</DependentUpon>
     </Compile>

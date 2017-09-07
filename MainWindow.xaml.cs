@@ -62,7 +62,6 @@ namespace Smash_Character_Database_Editor
                         Characters[i] = new Character(Character_DB_Buffer.Skip(0xD + 0x7F * i).Take(0x7F).ToArray());
                         Unsorted_Characters[i] = Characters[i];
                     }
-<<<<<<< HEAD
                     // Name Random & All Miis
                     Characters[0].Name = "Random";
                     Characters[59].Name = "All Miis";
@@ -81,11 +80,6 @@ namespace Smash_Character_Database_Editor
 
                     // Check for fighters with the same CSS position
                     Check_Same_Positions(false);
-=======
-                    Characters[0].Name = "Random";
-                    // Sort Characters by CSS order
-                    SortCharacters();
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
                 }
                 else
                 {
@@ -185,25 +179,14 @@ namespace Smash_Character_Database_Editor
             GenerateCharacterPanels();
 
             DataObject.AddPastingHandler(CharacterSlotsTextBox, OnPaste);
-<<<<<<< HEAD
-=======
-
-            //new CSS_Peview_Window(Characters).Show();
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
         }
 
         private void GenerateCharacterPanels()
         {
             CharacterStackPanel.Children.Clear();
-<<<<<<< HEAD
             for (int i = 0; i < Characters.Length; i++)
             {
                 if ((Characters[i].ID != 0xFFFFFFFF && Characters[i].Playable == 1) || Characters[i].Name.Equals("Random") || Characters[i].Name.Equals("All Miis")) // 0 is random
-=======
-            for (int i = 3; i < Characters.Length; i++)
-            {
-                if (Characters[i].ID != 0xFFFFFFFF || Characters[i].Name == "Random") // 0 is random
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
                 {
                     Character Current_Character = Characters[i];
                     StackPanel Character_Panel = new StackPanel
@@ -231,13 +214,9 @@ namespace Smash_Character_Database_Editor
                     };
 
                     // Set Default Selection
-<<<<<<< HEAD
                     if ((Selected_Character != null && Selected_Character.Name.Equals(Characters[i].Name)))
                         SetSelectedFighter(Current_Character, Character_Panel);
                     else if (Selected_Character == null && Characters[i].ID == 3)
-=======
-                    if ((Selected_Character != null && Selected_Character.Name.Equals(Characters[i].Name)) || Characters[i].ID == 3)
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
                         SetSelectedFighter(Current_Character, Character_Panel);
 
                     Character_Panel.Children.Add(Character_Image);
@@ -254,20 +233,14 @@ namespace Smash_Character_Database_Editor
         private void SortCharacters()
         {
             Array.Sort(Characters, CompareCharacters);
-<<<<<<< HEAD
 
             // Put Random at the end (since changing it's CSS Position won't change how smash positions it)
             Character Random = null;
             int Random_Location = 0;
-=======
-            // Put Random at the end (since changing it's CSS Position won't change how smash positions it)
-            Character End_Character = Characters[Characters.Length - 1];
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
             for (int i = 0; i < Characters.Length; i++)
             {
                 if (Characters[i].Name.Equals("Random"))
                 {
-<<<<<<< HEAD
                     Random = Characters[i];
                     Random_Location = i;
                     break;
@@ -302,13 +275,6 @@ namespace Smash_Character_Database_Editor
                 }
                 Characters[Characters.Length - 2] = Random;
             }
-=======
-                    Characters[Characters.Length - 1] = Characters[i];
-                    Characters[i] = End_Character;
-                    break;
-                }
-            }
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
         }
 
         private static int CompareCharacters(Character A, Character B)
@@ -367,10 +333,6 @@ namespace Smash_Character_Database_Editor
             Selected_Character_Panel = Character_Panel;
             SelectedFighterImage.Source = Fighter.Character_Image;
             SelectedFighterLabel.Content = string.Format("{0} [ID {1}]", Fighter.Name, Fighter.ID);
-<<<<<<< HEAD
-=======
-            // TODO: Finish Reloading Fighter Data
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
             CharacterSlotsTextBox.Text = Fighter.Character_Slots.ToString();
             ShowOnCSSCheckBox.IsChecked = Fighter.Show_on_CSS;
             IsDLCCheckBox.IsChecked = Fighter.Is_DLC;
@@ -613,25 +575,9 @@ namespace Smash_Character_Database_Editor
                     Selected_Character.CSS_Position = (byte)Slots;
                 }
                 // Update other characters CSS Positions
-<<<<<<< HEAD
                 if (AllowAutoSort)
                 {
                     Auto_Sort(Original_Position);
-=======
-                foreach (Character Fighter in Characters)
-                {
-                    if ((Fighter != Selected_Character && Fighter.ID != 0xFFFFFFFF) || Fighter.Name.Equals("Random"))
-                    {
-                        if (Selected_Character.CSS_Position < Original_Position && Fighter.CSS_Position >= Selected_Character.CSS_Position && Fighter.CSS_Position < Original_Position)
-                        {
-                            Fighter.CSS_Position += 1;
-                        }
-                        else if (Selected_Character.CSS_Position > Original_Position && Fighter.CSS_Position <= Selected_Character.CSS_Position && Fighter.CSS_Position > Original_Position)
-                        {
-                            Fighter.CSS_Position -= 1;
-                        }
-                    }
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
                 }
                 SortCharacters();
                 GenerateCharacterPanels();
@@ -788,7 +734,6 @@ namespace Smash_Character_Database_Editor
             Hide();
             new CSS_Peview_Window(this, Characters).Show();
         }
-<<<<<<< HEAD
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -962,7 +907,5 @@ namespace Smash_Character_Database_Editor
         }
 
         #endregion
-=======
->>>>>>> 63ca892648e9fa391d728a909d29e3ec9cf1b8e1
     }
 }
